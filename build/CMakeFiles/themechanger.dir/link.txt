@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/themechanger.dir/src/src/main.cpp.o CMakeFiles/themechanger.dir/src/src/ThemeChanger.cpp.o  -o themechanger 

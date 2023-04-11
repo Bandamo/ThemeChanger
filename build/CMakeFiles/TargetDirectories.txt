@@ -1,0 +1,3 @@
+/home/thomas/CodingProjects/ThemeChanger/build/CMakeFiles/rebuild_cache.dir
+/home/thomas/CodingProjects/ThemeChanger/build/CMakeFiles/edit_cache.dir
+/home/thomas/CodingProjects/ThemeChanger/build/CMakeFiles/themechanger.dir
