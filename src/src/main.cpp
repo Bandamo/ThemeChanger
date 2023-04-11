@@ -18,9 +18,11 @@ int main(int argc, char** argv){
 
         json data = json::parse(data_file);
 
-        cout << data["results"]["sunrise"] << endl;
+        string date = data["results"]["sunrise"];
+
+        cout << tc.convert_time_to_epoch(date) << endl;
         
-        if (tc.changing_day()){ // If whe change the day
+        if (tc.changing_day()){ // If we change the day
 
             tc.chg_dusk_to_dawn();
         }

@@ -20,6 +20,7 @@ class ThemeChanger{
         void update_day();
         void load_parameters();
         std::string GET(std::string file);
+        int32_t convert_time_to_epoch(std::string t);
     private:
         uint16_t day;
         uint8_t period;

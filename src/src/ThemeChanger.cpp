@@ -61,5 +61,16 @@ void ThemeChanger::load_parameters(){
     lon = data["lon"];
     lat = data["lat"];
 
-    url = "https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + lon +"&date=today";
+    url = "\"https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + lon +"&formatted=0&date=today\"";
+    cout << "url set to :" << url << endl;
+}
+
+int32_t ThemeChanger::convert_time_to_epoch(string t){
+    struct tm *timeptr,result;
+    char buf[1024];
+    strncpy(buf, t.c_str(), sizeof(buf));
+    buf[sizeof(buf) - 1] = 0;
+    strptime(buf, "%Y-%m-%dT%H:%M:%S+00:00",&result);
+    int32_t epoch_time = result.tm_sec + result.tm_min*60 + result.tm_hour*3600 + result.tm_yday*86400 + (result.tm_year-70)*31536000 + ((result.tm_year-69)/4)*86400 - ((result.tm_year-1)/100)*86400 + ((result.tm_year+299)/400)*86400;
+    return epoch_time;
 }
