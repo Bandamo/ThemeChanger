@@ -74,3 +74,39 @@ int32_t ThemeChanger::convert_time_to_epoch(string t){
     int32_t epoch_time = result.tm_sec + result.tm_min*60 + result.tm_hour*3600 + result.tm_yday*86400 + (result.tm_year-70)*31536000 + ((result.tm_year-69)/4)*86400 - ((result.tm_year-1)/100)*86400 + ((result.tm_year+299)/400)*86400;
     return epoch_time;
 }
+
+void ThemeChanger::update_day_or_night(json data){
+    string sunrise = data["results"]["sunrise"];
+    string sunset = data["results"]["sunset"];
+
+    sunrise_epoch = convert_time_to_epoch(sunrise);
+    sunset_epoch = convert_time_to_epoch(sunset);
+
+    current_epoch = time(nullptr);
+
+    bool prec_day_or_night = day_or_night;
+
+    if (current_epoch > sunrise_epoch && current_epoch < sunset_epoch){
+        day_or_night = true;
+    }
+    else{
+        day_or_night = false;
+    }
+
+    if (prec_day_or_night != day_or_night){
+        ChangeTheme(day_or_night);
+    }
+}
+
+void ThemeChanger::ChangeTheme(bool don){
+    string cmd;
+
+    if (don){
+        cmd = "."+pwd()+"/../src/src/from_night_to_day.sh";
+    }
+    else{
+        cmd = "."+pwd()+"/../src/src/from_day_to_night.sh";
+    }
+
+    system(cmd.c_str());
+}
