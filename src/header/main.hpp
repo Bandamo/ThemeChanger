@@ -22,13 +22,17 @@ class ThemeChanger{
         bool changing_day();
         void update_day();
         void load_parameters();
+        void save_parameters();
         std::string GET(std::string file);
         int32_t convert_time_to_epoch(std::string t);
-        void update_day_or_night(json data);
+        void get_sunset_and_sunrise(json data);
+        void update_day_or_night();
+        bool request_success();
+        void request_error_process();
+        void request_success_process();
     private:
-        void ChangeTheme(bool don);
+        void ChangeTheme();
         uint16_t day;
-        uint8_t period;
         uint16_t current_day;
         string url;
         string lat;
@@ -36,5 +40,8 @@ class ThemeChanger{
         int32_t current_epoch;
         int32_t sunrise_epoch;
         int32_t sunset_epoch;
+        int32_t default_sunrise;
+        int32_t default_sunset;
+        bool updated_request;
         bool day_or_night; // True if day, false if night
 };
